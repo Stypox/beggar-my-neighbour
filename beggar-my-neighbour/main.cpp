@@ -52,6 +52,8 @@ int main() {
 	bool turn = 1;
 	bool handBeginner = turn;
 	uint64 rounds = 0, hands = 0;
+
+
 	while (!playerA.isEmpty() && !playerB.isEmpty()) {
 		if (turn) {
 			hand.add(playerA.first());
@@ -64,11 +66,9 @@ int main() {
 
 		hand.test();
 
-		if (hand.shouldTurn()) {
-			turn = !turn;
-		}
+		
 		if (hand.ended()) {
-			std::cout << "|" << hand.ended() << "|";
+			turn = !turn;
 			if (turn) {
 				playerA.append(hand.get());
 			}
@@ -81,18 +81,18 @@ int main() {
 			std::cout << "\n";
 			if (handBeginner) {
 				if (turn) {
-					std::cout << "playerA-playerA";
+					std::cout << "HandBeginner: Player A;    Winner: Player A;";
 				}
 				else {
-					std::cout << "playerA-playerB";
+					std::cout << "HandBeginner: Player A;    Winner: Player B;";
 				}
 			}
 			else {
 				if (turn) {
-					std::cout << "playerB-playerA";
+					std::cout << "HandBeginner: Player B;    Winner: Player A;";
 				}
 				else {
-					std::cout << "playerB-playerB";
+					std::cout << "HandBeginner: Player B;    Winner: Player B;";
 				}
 			}
 			std::cout << "\nHand: ";
@@ -110,17 +110,19 @@ int main() {
 
 			if (playerA.isOriginal()) {
 				std::cout << "Infinite series found after ";
-				std::cout << rounds << " rounds and " << hands + 1 << " hands.\n";
+				std::cout << rounds << " rounds and " << hands + 1 << " hand" << ((hands == 0) ? "" : "s") << ".\n";
 				return pressToReturn(1);
 			}
+		}
+		else if (hand.shouldTurn()) {
+			turn = !turn;
 		}
 
 		++rounds;
 	}
 
-	if (!hand.isClear()) {
-		turn = !turn;
 
+	if (!hand.isClear()) {
 		if (turn) {
 			playerA.append(hand.get());
 		}
@@ -128,23 +130,23 @@ int main() {
 			playerB.append(hand.get());
 		}
 	}
-
+	
 #ifdef DEBUG
 	std::cout << "\n";
 	if (handBeginner) {
 		if (turn) {
-			std::cout << "playerA-playerA";
+			std::cout << "HandBeginner: Player A;    Winner: Player A;";
 		}
 		else {
-			std::cout << "playerA-playerB";
+			std::cout << "HandBeginner: Player A;    Winner: Player B;";
 		}
 	}
 	else {
 		if (turn) {
-			std::cout << "playerB-playerA";
+			std::cout << "HandBeginner: Player B;    Winner: Player A;";
 		}
 		else {
-			std::cout << "playerB-playerB";
+			std::cout << "HandBeginner: Player B;    Winner: Player B;";
 		}
 	}
 	std::cout << "\nHand: ";
@@ -162,7 +164,7 @@ int main() {
 	else {
 		std::cout << "\n\n\nPlayer B won after ";
 	}
-	std::cout << rounds << " rounds and " << hands + 1 << " hands.\n";
+	std::cout << rounds << " round" << ((rounds == 1) ? "" : "s") << " and " << hands + 1 << " hand" << ((hands == 0) ? "" : "s") << ".\n";
 
 	return pressToReturn();
 }

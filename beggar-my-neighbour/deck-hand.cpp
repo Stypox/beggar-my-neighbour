@@ -95,38 +95,36 @@ void Deck::print() {
 void Hand::testOne() {
 	std::cout << (int)currentPosition << " ";
 	switch (cards[currentPosition]) {
-	case empty:
-		std::cout << "emp\n";
-		ShouldTurn = IsLastSeenSpecial;
+	case one:
+		std::cout << "one";
+		ShouldTurn = true;
 		IsLastSeenSpecial = false;
+		++currentPosition;
 		toCall = 1;
 		break;
-	case one:
-		std::cout << "one    ";
-		IsLastSeenSpecial = true;
-		++currentPosition;
-		testOne();
-		break;
 	case two:
-		std::cout << "two    ";
-		IsLastSeenSpecial = true;
+		std::cout << "two";
+		ShouldTurn = true;
+		IsLastSeenSpecial = false;
 		++currentPosition;
-		testTwo();
+		toCall = 2;
 		break;
 	case three:
-		std::cout << "thr    ";
-		IsLastSeenSpecial = true;
+		std::cout << "thr";
+		ShouldTurn = true;
+		IsLastSeenSpecial = false;
 		++currentPosition;
-		testThree();
+		toCall = 3;
 		break;
 	case four:
-		std::cout << "fou    ";
-		IsLastSeenSpecial = true;
+		std::cout << "fou";
+		ShouldTurn = true;
+		IsLastSeenSpecial = false;
 		++currentPosition;
-		testFour();
+		toCall = 4;
 		break;
 	default:
-		std::cout << "cle    ";
+		std::cout << "cle";
 		Ended = true;
 		ShouldTurn = true;
 		break;
@@ -135,123 +133,120 @@ void Hand::testOne() {
 void Hand::testTwo() {
 	std::cout << (int)currentPosition << " ";
 	switch (cards[currentPosition]) {
-	case empty:
-		std::cout << "emp";
-		ShouldTurn = IsLastSeenSpecial;
-		IsLastSeenSpecial = false;
-		toCall = 2;
-		break;
 	case one:
-		std::cout << "one    ";
-		IsLastSeenSpecial = true;
+		std::cout << "one";
+		ShouldTurn = true;
+		IsLastSeenSpecial = false;
 		++currentPosition;
-		testOne();
+		toCall = 1;
 		break;
 	case two:
-		std::cout << "two    ";
-		IsLastSeenSpecial = true;
-		++currentPosition;
-		testTwo();
-		break;
-	case three:
-		std::cout << "thr    ";
-		IsLastSeenSpecial = true;
-		++currentPosition;
-		testThree();
-		break;
-	case four:
-		std::cout << "fou    ";
-		IsLastSeenSpecial = true;
-		++currentPosition;
-		testFour();
-		break;
-	default:
-		std::cout << "cle    ";
+		std::cout << "two";
+		ShouldTurn = true;
 		IsLastSeenSpecial = false;
 		++currentPosition;
-		testOne();
+		toCall = 2;
+		break;
+	case three:
+		std::cout << "thr";
+		ShouldTurn = true;
+		IsLastSeenSpecial = false;
+		++currentPosition;
+		toCall = 3;
+		break;
+	case four:
+		std::cout << "fou";
+		ShouldTurn = true;
+		IsLastSeenSpecial = false;
+		++currentPosition;
+		toCall = 4;
+		break;
+	default:
+		std::cout << "cle";
+		ShouldTurn = false;
+		IsLastSeenSpecial = false;
+		++currentPosition;
+		toCall = 1;
 		break;
 	}
 }
 void Hand::testThree() {
 	std::cout << (int)currentPosition << " ";
 	switch (cards[currentPosition]) {
-	case empty:
-		std::cout << "emp";
-		ShouldTurn = IsLastSeenSpecial;
-		IsLastSeenSpecial = false;
-		toCall = 3;
-		break;
 	case one:
-		std::cout << "one    ";
-		IsLastSeenSpecial = true;
+		std::cout << "one";
+		ShouldTurn = true;
+		IsLastSeenSpecial = false;
 		++currentPosition;
-		testOne();
+		toCall = 1;
 		break;
 	case two:
-		std::cout << "two    ";
-		IsLastSeenSpecial = true;
-		++currentPosition;
-		testTwo();
-		break;
-	case three:
-		std::cout << "thr    ";
-		IsLastSeenSpecial = true;
-		++currentPosition;
-		testThree();
-		break;
-	case four:
-		std::cout << "fou    ";
-		IsLastSeenSpecial = true;
-		++currentPosition;
-		testFour();
-		break;
-	default:
-		std::cout << "cle    ";
+		std::cout << "two";
+		ShouldTurn = true;
 		IsLastSeenSpecial = false;
 		++currentPosition;
-		testTwo();
+		toCall = 2;
+		break;
+	case three:
+		std::cout << "thr";
+		ShouldTurn = true;
+		IsLastSeenSpecial = false;
+		++currentPosition;
+		toCall = 3;
+		break;
+	case four:
+		std::cout << "fou";
+		ShouldTurn = true;
+		IsLastSeenSpecial = false;
+		++currentPosition;
+		toCall = 4;
+		break;
+	default:
+		std::cout << "cle";
+		ShouldTurn = false;
+		IsLastSeenSpecial = false;
+		++currentPosition;
+		toCall = 2;
 		break;
 	}
 }
 void Hand::testFour() {
 	std::cout << (int)currentPosition << " ";
 	switch (cards[currentPosition]) {
-	case empty:
-		std::cout << "emp";
+	case one:
+		std::cout << "one";
 		ShouldTurn = true;
 		IsLastSeenSpecial = false;
-		toCall = 4;
-		break;
-	case one:
-		std::cout << "one    ";
-		IsLastSeenSpecial = true;
 		++currentPosition;
-		testOne();
+		toCall = 1;
 		break;
 	case two:
-		std::cout << "two    ";
-		IsLastSeenSpecial = true;
-		++currentPosition;
-		testTwo();
-		break;
-	case three:
-		std::cout << "thr    ";
-		IsLastSeenSpecial = true;
-		++currentPosition;
-		testThree();
-		break;
-	case four:
-		std::cout << "fou    ";
-		IsLastSeenSpecial = true;
-		++currentPosition;
-		testFour();
-		break;
-	default:
-		std::cout << "cle    ";
+		std::cout << "two";
+		ShouldTurn = true;
 		IsLastSeenSpecial = false;
 		++currentPosition;
-		testOne();
+		toCall = 2;
+		break;
+	case three:
+		std::cout << "thr";
+		ShouldTurn = true;
+		IsLastSeenSpecial = false;
+		++currentPosition;
+		toCall = 3;
+		break;
+	case four:
+		std::cout << "fou";
+		ShouldTurn = true;
+		IsLastSeenSpecial = false;
+		++currentPosition;
+		toCall = 4;
+		break;
+	default:
+		std::cout << "cle";
+		ShouldTurn = false;
+		IsLastSeenSpecial = false;
+		++currentPosition;
+		toCall = 3;
 		break;
 	}
 }
@@ -274,46 +269,41 @@ void Hand::test() {
 	switch (toCall) {
 	case 0:
 		std::cout << "case0    ";
-		IsLastSeenSpecial = true;
+		ShouldTurn = true;
 		for (; currentPosition < nrCards; ++currentPosition) {
 			std::cout << (int)currentPosition << " ";
 
 			switch (cards[currentPosition]) {
-			case empty:
-				std::cout << "emp";
-				Ended = false;
-				ShouldTurn = true;
-				std::cout << "\n";
-				return;
 			case one:
-				std::cout << "one    ";
+				std::cout << "one\n";
+				IsLastSeenSpecial = false;
 				++currentPosition;
-				testOne();
-				std::cout << "\n";
+				toCall = 1;
 				return;
 			case two:
-				std::cout << "two    ";
+				std::cout << "two\n";
+				IsLastSeenSpecial = false;
 				++currentPosition;
-				testTwo();
-				std::cout << "\n";
+				toCall = 2;
 				return;
 			case three:
-				std::cout << "thr    ";
+				std::cout << "thr\n";
+				IsLastSeenSpecial = false;
 				++currentPosition;
-				testThree();
-				std::cout << "\n";
+				toCall = 3;
 				return;
 			case four:
-				std::cout << "fou    ";
+				std::cout << "fou\n";
+				IsLastSeenSpecial = false;
 				++currentPosition;
-				testFour();
-				std::cout << "\n";
+				toCall = 4;
 				return;
 			default:
-				std::cout << "cle    ";
+				std::cout << "cle\n";
+				++currentPosition;
+				return;
 			}
 		}
-		std::cout << "\n";
 		break;
 	case 1:
 		std::cout << "case1    ";
