@@ -28,7 +28,7 @@ public:
 	void shift();
 	void append(uint8 cardsToAdd[]);
 
-	bool isEmpty();
+	bool notEmpty();
 	bool isOriginal();
 
 	uint8 operator[] (uint8 Position);

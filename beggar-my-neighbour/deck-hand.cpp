@@ -47,8 +47,8 @@ void Deck::append(uint8 cardsToAdd[]) {
 	}
 }
 
-bool Deck::isEmpty() {
-	return *cards == empty;
+bool Deck::notEmpty() {
+	return *cards != empty;
 }
 bool Deck::isOriginal() {
 	for (uint8 currentCard = 0; currentCard < nrCards; ++currentCard) {

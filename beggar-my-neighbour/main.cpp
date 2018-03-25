@@ -54,7 +54,7 @@ int main() {
 	uint64 rounds = 0, hands = 0;
 
 
-	while (!playerA.isEmpty() && !playerB.isEmpty()) {
+	while (playerA.notEmpty() && playerB.notEmpty()) {
 		if (turn) {
 			hand.add(playerA.first());
 			playerA.shift();
@@ -119,8 +119,10 @@ int main() {
 		}
 
 		++rounds;
+		std::cout << "Turn: " << turn << "\n";
 	}
 
+	turn = playerA.notEmpty();
 
 	if (!hand.isClear()) {
 		if (turn) {
@@ -151,10 +153,14 @@ int main() {
 	}
 	std::cout << "\nHand: ";
 	hand.print();
-	std::cout << "\nPlayer A: ";
-	playerA.print();
-	std::cout << "\nPlayer B: ";
-	playerB.print();
+	if (turn) {
+		std::cout << "\nPlayer A: ";
+		playerA.print();
+	}
+	else {
+		std::cout << "\nPlayer B: ";
+		playerB.print();
+	}
 	std::cout << "\n\n";
 #endif
 
