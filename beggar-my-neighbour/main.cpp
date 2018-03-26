@@ -32,16 +32,17 @@ int main() {
 	std::cout << "\n\n";
 #endif
 #ifdef DEBUG_TIME
-	uint64 nrIterations = 0;
-	tPoint pStart = cl::now();
+	uint64 nrIterations = 1, microsSinceStart;
+	tPoint pStart = cl::now(), pNow;
 #endif
 
 
+	bool turn;
 	Hand hand;
 	while (1) {
 	loopContinue:
 
-		bool turn = 1;
+		turn = 1;
 	#ifdef DEBUG_ENDGAME
 		bool handBeginner = turn;
 		uint64 rounds = 0, hands = 0;
@@ -96,7 +97,7 @@ int main() {
 			#endif
 				hand.clear();
 
-				if (playerA.isOriginal()) {
+				if (playerA.isOriginal() && playerB.isOriginal()) {
 				#ifdef DEBUG_GAME
 					std::cout << "Infinite series found after ";
 					std::cout << rounds << " rounds and " << hands + 1 << " hand" << ((hands == 0) ? "" : "s") << ".\n\n\n";
@@ -143,7 +144,7 @@ int main() {
 			std::cout << "\nPlayer A won after ";
 			std::cout << rounds << " round" << ((rounds == 1) ? "" : "s") << " and " << hands + 1 << " hand" << ((hands == 0) ? "" : "s") << ".\n\n\n\n";
 		#endif
-			randomizeFromDeck(playerA, playerB, playerA.get());
+			randomizeFromDeck(playerA, playerB, playerA.get(), 1);
 		}
 		else {
 			playerB.append(hand.get());
@@ -164,7 +165,7 @@ int main() {
 			std::cout << "\nPlayer B won after ";
 			std::cout << rounds << " round" << ((rounds == 1) ? "" : "s") << " and " << hands + 1 << " hand" << ((hands == 0) ? "" : "s") << ".\n\n\n\n";
 		#endif
-			randomizeFromDeck(playerA, playerB, playerB.get());
+			randomizeFromDeck(playerA, playerB, playerB.get(), 0);
 		}
 
 		if (!hand.isClear()) {
@@ -173,9 +174,9 @@ int main() {
 
 	#ifdef DEBUG_TIME
 		if ((nrIterations % printTimeEveryIterations) == 0) {
-			tPoint pNow = cl::now();
-			uint64 microsSinceStart = std::chrono::duration_cast<micros>(pNow - pStart).count();
-			std::cout << "\n" << (double)microsSinceStart / ((double)nrIterations + 1.0);
+			pNow = cl::now();
+			microsSinceStart = std::chrono::duration_cast<micros>(pNow - pStart).count();
+			std::cout << '\n' << microsSinceStart / nrIterations;
 		}
 		++nrIterations;
 	#endif

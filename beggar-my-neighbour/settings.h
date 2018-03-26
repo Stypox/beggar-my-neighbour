@@ -19,11 +19,12 @@
 
 
 #ifdef DEBUG_TIME
-//#include <time.h>
 #include <chrono>
 using tPoint = std::chrono::high_resolution_clock::time_point;
 using cl = std::chrono::high_resolution_clock;
 using micros = std::chrono::microseconds;
+#else
+#include <time.h>
 #endif
 
 using int8 = int8_t;
@@ -57,5 +58,5 @@ constexpr const uint8 basicDeck[nrCards] = { 1,1,1,1,2,2,2,2,3,3,3,3,4,4,4,4,0,0
 
 const int timeRand = (int)time(0);
 
-constexpr uint64 printTimeEveryIterations = 5000;
+constexpr uint64 printTimeEveryIterations = 10000;
 

@@ -17,23 +17,19 @@ bool getFromFile(Deck &deckA, Deck &deckB) {
 	input.open();
 
 
-	uint8 * cardsA = new uint8[nrCards],
-		*cardsB = new uint8[nrCards];
 	for (uint8 currentCard = 0; currentCard < halfCards; ++currentCard) {
-		input >> cardsA[currentCard];
-		cardsB[currentCard + halfCards] = empty;
+		input >> deckA.cards[currentCard];
+		deckA.originalCards[currentCard] = deckA.cards[currentCard];
 	}
 	for (uint8 currentCard = halfCards; currentCard < nrCards; ++currentCard) {
-		input >> cardsB[currentCard - halfCards];
-		cardsA[currentCard] = empty;
+		input >> deckB.cards[currentCard - halfCards];
+		deckB.originalCards[currentCard] = deckB.cards[currentCard];
+		deckA.cards[currentCard] = empty;
+		deckB.cards[currentCard] = empty;
 	}
 
 	if (input.failErr()) return false;
 
-	deckA(cardsA);
-	deckB(cardsB);
-	delete(cardsA);
-	delete(cardsB);
 	return true;
 }
 
@@ -52,22 +48,53 @@ void randomizeFromDeck(Deck &deckA, Deck &deckB, uint8 deckFrom[nrCards]) {
 	}
 #endif
 
-	uint8 * cardsA = new uint8[nrCards],
-		*cardsB = new uint8[nrCards];
 	uint8 currentCard = 0;
 	for (; currentCard < halfCards; ++currentCard) {
-		cardsA[currentCard] = deckFrom[currentCard];
-		cardsB[currentCard + halfCards] = empty;
+		deckA.originalCards[currentCard] = deckFrom[currentCard];
+		deckA.cards[currentCard] = deckFrom[currentCard];
 	}
 	for (; currentCard < nrCards; ++currentCard) {
-		cardsB[currentCard - halfCards] = deckFrom[currentCard];
-		cardsA[currentCard] = empty;
+		deckB.originalCards[currentCard - halfCards] = deckFrom[currentCard];
+		deckB.cards[currentCard - halfCards] = deckFrom[currentCard];
+		deckA.cards[currentCard] = empty;
+		deckB.cards[currentCard] = empty;
 	}
+}
 
-	deckA(cardsA);
-	deckB(cardsB);
-	delete(cardsA);
-	delete(cardsB);
+void randomizeFromDeck(Deck & deckA, Deck & deckB, uint8 deckFrom[nrCards], bool winner) {
+#ifdef DEBUG_RAND
+	std::cout << "\n";
+	for (uint8 currentCard = 0; currentCard < nrCards; ++currentCard) {
+		std::cout << (int)deckFrom[currentCard] << " ";
+	}
+#endif
+	//std::random_shuffle(deckFrom, deckFrom + nrCards, cardsRand); TODO! is this good?
+#ifdef DEBUG_RAND
+	std::cout << "\n";
+	for (uint8 currentCard = 0; currentCard < nrCards; ++currentCard) {
+		std::cout << (int)deckFrom[currentCard] << " ";
+	}
+#endif
+
+	uint8 currentCard = 0;
+	for (; currentCard < halfCards; ++currentCard) {
+		deckA.originalCards[currentCard] = deckFrom[currentCard];
+		deckA.cards[currentCard] = deckFrom[currentCard];
+	}
+	if (winner) {
+		for (; currentCard < nrCards; ++currentCard) {
+			deckB.originalCards[currentCard - halfCards] = deckFrom[currentCard];
+			deckB.cards[currentCard - halfCards] = deckFrom[currentCard];
+			deckA.cards[currentCard] = empty;
+		}
+	}
+	else {
+		for (; currentCard < nrCards; ++currentCard) {
+			deckB.originalCards[currentCard - halfCards] = deckFrom[currentCard];
+			deckB.cards[currentCard - halfCards] = deckFrom[currentCard];
+			deckB.cards[currentCard] = empty;
+		}
+	}
 }
 
 void randomize(Deck &deckA, Deck &deckB) {

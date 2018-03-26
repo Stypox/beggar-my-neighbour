@@ -4,11 +4,11 @@
 
 //cards in players' hand
 class Deck {
-private:
+public:
 	uint8 originalCards[nrCards];
 	uint8 cards[nrCards];
 
-public:
+
 	Deck();
 	Deck(uint8 Cards[nrCards]);
 	void operator() (uint8 Cards[nrCards]);

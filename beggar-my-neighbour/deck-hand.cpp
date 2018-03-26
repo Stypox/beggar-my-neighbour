@@ -10,7 +10,12 @@ bool isSpecial(uint8 card) {
 
 
 
-Deck::Deck() {}
+Deck::Deck() {
+	for (uint8 currentCard = 0; currentCard < nrCards; ++currentCard) {
+		cards[currentCard] = empty;
+		originalCards[currentCard] = empty;
+	}
+}
 Deck::Deck(uint8 Cards[nrCards]) {
 	for (uint8 currentCard = 0; currentCard < nrCards; ++currentCard) {
 		cards[currentCard] = Cards[currentCard];
@@ -293,12 +298,7 @@ Hand::Hand() : currentPosition(0), toCall(0), ShouldTurn(false), Ended(false) {
 }
 
 void Hand::add(uint8 card) {
-	for (int currentCard = 0; currentCard < nrCards; ++currentCard) {
-		if (cards[currentCard] == empty) {
-			cards[currentCard] = card;
-			break;
-		}
-	}
+	cards[currentPosition] = card;
 }
 void Hand::test() {
 #ifdef DEBUG_LOGIC
