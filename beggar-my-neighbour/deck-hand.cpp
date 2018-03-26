@@ -1,16 +1,8 @@
 #pragma once
+
+#include "settings.h"
 #include "deck-hand.h"
 
-#include <iostream>
-
-using int8 = int8_t;
-using int16 = int16_t;
-using int32 = int32_t;
-using int64 = int64_t;
-using uint8 = uint8_t;
-using uint16 = uint16_t;
-using uint32 = uint32_t;
-using uint64 = uint64_t;
 
 bool isSpecial(uint8 card) {
 	return card == one || card == two || card == three || card == four;
@@ -57,6 +49,12 @@ bool Deck::isOriginal() {
 	return true;
 }
 
+uint8 * Deck::get() {
+	return cards;
+}
+uint8 * Deck::getOriginal() {
+	return originalCards;
+}
 uint8 Deck::operator[](uint8 Position) {
 	return cards[Position];
 }
@@ -93,165 +91,202 @@ void Deck::print() {
 
 
 void Hand::testOne() {
+#ifdef DEBUG_LOGIC
 	std::cout << (int)currentPosition << " ";
 	switch (cards[currentPosition]) {
 	case one:
 		std::cout << "one";
+		break;
+	case two:
+		std::cout << "two";
+		break;
+	case three:
+		std::cout << "thr";
+		break;
+	case four:
+		std::cout << "fou";
+		break;
+	default:
+		std::cout << "cle";
+		break;
+	}
+#endif
+	switch (cards[currentPosition]) {
+	case one:
 		ShouldTurn = true;
-		IsLastSeenSpecial = false;
 		++currentPosition;
 		toCall = 1;
 		break;
 	case two:
-		std::cout << "two";
 		ShouldTurn = true;
-		IsLastSeenSpecial = false;
 		++currentPosition;
 		toCall = 2;
 		break;
 	case three:
-		std::cout << "thr";
 		ShouldTurn = true;
-		IsLastSeenSpecial = false;
 		++currentPosition;
 		toCall = 3;
 		break;
 	case four:
-		std::cout << "fou";
 		ShouldTurn = true;
-		IsLastSeenSpecial = false;
 		++currentPosition;
 		toCall = 4;
 		break;
 	default:
-		std::cout << "cle";
 		Ended = true;
 		ShouldTurn = true;
 		break;
 	}
 }
 void Hand::testTwo() {
+#ifdef DEBUG_LOGIC
 	std::cout << (int)currentPosition << " ";
 	switch (cards[currentPosition]) {
 	case one:
 		std::cout << "one";
+		break;
+	case two:
+		std::cout << "two";
+		break;
+	case three:
+		std::cout << "thr";
+		break;
+	case four:
+		std::cout << "fou";
+		break;
+	default:
+		std::cout << "cle";
+		break;
+	}
+#endif
+	switch (cards[currentPosition]) {
+	case one:
 		ShouldTurn = true;
-		IsLastSeenSpecial = false;
 		++currentPosition;
 		toCall = 1;
 		break;
 	case two:
-		std::cout << "two";
 		ShouldTurn = true;
-		IsLastSeenSpecial = false;
 		++currentPosition;
 		toCall = 2;
 		break;
 	case three:
-		std::cout << "thr";
 		ShouldTurn = true;
-		IsLastSeenSpecial = false;
 		++currentPosition;
 		toCall = 3;
 		break;
 	case four:
-		std::cout << "fou";
 		ShouldTurn = true;
-		IsLastSeenSpecial = false;
 		++currentPosition;
 		toCall = 4;
 		break;
 	default:
-		std::cout << "cle";
 		ShouldTurn = false;
-		IsLastSeenSpecial = false;
 		++currentPosition;
 		toCall = 1;
 		break;
 	}
 }
 void Hand::testThree() {
+#ifdef DEBUG_LOGIC
 	std::cout << (int)currentPosition << " ";
 	switch (cards[currentPosition]) {
 	case one:
 		std::cout << "one";
+		break;
+	case two:
+		std::cout << "two";
+		break;
+	case three:
+		std::cout << "thr";
+		break;
+	case four:
+		std::cout << "fou";
+		break;
+	default:
+		std::cout << "cle";
+		break;
+	}
+#endif
+	switch (cards[currentPosition]) {
+	case one:
 		ShouldTurn = true;
-		IsLastSeenSpecial = false;
 		++currentPosition;
 		toCall = 1;
 		break;
 	case two:
-		std::cout << "two";
 		ShouldTurn = true;
-		IsLastSeenSpecial = false;
 		++currentPosition;
 		toCall = 2;
 		break;
 	case three:
-		std::cout << "thr";
 		ShouldTurn = true;
-		IsLastSeenSpecial = false;
 		++currentPosition;
 		toCall = 3;
 		break;
 	case four:
-		std::cout << "fou";
 		ShouldTurn = true;
-		IsLastSeenSpecial = false;
 		++currentPosition;
 		toCall = 4;
 		break;
 	default:
-		std::cout << "cle";
 		ShouldTurn = false;
-		IsLastSeenSpecial = false;
 		++currentPosition;
 		toCall = 2;
 		break;
 	}
 }
 void Hand::testFour() {
+#ifdef DEBUG_LOGIC
 	std::cout << (int)currentPosition << " ";
 	switch (cards[currentPosition]) {
 	case one:
 		std::cout << "one";
+		break;
+	case two:
+		std::cout << "two";
+		break;
+	case three:
+		std::cout << "thr";
+		break;
+	case four:
+		std::cout << "fou";
+		break;
+	default:
+		std::cout << "cle";
+		break;
+	}
+#endif
+	switch (cards[currentPosition]) {
+	case one:
 		ShouldTurn = true;
-		IsLastSeenSpecial = false;
 		++currentPosition;
 		toCall = 1;
 		break;
 	case two:
-		std::cout << "two";
 		ShouldTurn = true;
-		IsLastSeenSpecial = false;
 		++currentPosition;
 		toCall = 2;
 		break;
 	case three:
-		std::cout << "thr";
 		ShouldTurn = true;
-		IsLastSeenSpecial = false;
 		++currentPosition;
 		toCall = 3;
 		break;
 	case four:
-		std::cout << "fou";
 		ShouldTurn = true;
-		IsLastSeenSpecial = false;
 		++currentPosition;
 		toCall = 4;
 		break;
 	default:
-		std::cout << "cle";
 		ShouldTurn = false;
-		IsLastSeenSpecial = false;
 		++currentPosition;
 		toCall = 3;
 		break;
 	}
 }
 
-Hand::Hand() : currentPosition(0), toCall(0), IsLastSeenSpecial(0), ShouldTurn(0), Ended(0) {
+Hand::Hand() : currentPosition(0), toCall(0), ShouldTurn(false), Ended(false) {
 	for (uint8 currentCard = 0; currentCard < nrCards; ++currentCard) {
 		cards[currentCard] = empty;
 	}
@@ -266,66 +301,91 @@ void Hand::add(uint8 card) {
 	}
 }
 void Hand::test() {
+#ifdef DEBUG_LOGIC
 	switch (toCall) {
 	case 0:
 		std::cout << "case0    ";
-		ShouldTurn = true;
-		for (; currentPosition < nrCards; ++currentPosition) {
-			std::cout << (int)currentPosition << " ";
-
-			switch (cards[currentPosition]) {
-			case one:
-				std::cout << "one\n";
-				IsLastSeenSpecial = false;
-				++currentPosition;
-				toCall = 1;
-				return;
-			case two:
-				std::cout << "two\n";
-				IsLastSeenSpecial = false;
-				++currentPosition;
-				toCall = 2;
-				return;
-			case three:
-				std::cout << "thr\n";
-				IsLastSeenSpecial = false;
-				++currentPosition;
-				toCall = 3;
-				return;
-			case four:
-				std::cout << "fou\n";
-				IsLastSeenSpecial = false;
-				++currentPosition;
-				toCall = 4;
-				return;
-			default:
-				std::cout << "cle\n";
-				++currentPosition;
-				return;
-			}
-		}
 		break;
 	case 1:
 		std::cout << "case1    ";
-		testOne();
-		std::cout << "\n";
 		break;
 	case 2:
 		std::cout << "case2    ";
-		testTwo();
-		std::cout << "\n";
 		break;
 	case 3:
 		std::cout << "case3    ";
-		testThree();
-		std::cout << "\n";
 		break;
 	case 4:
 		std::cout << "case4    ";
-		testFour();
-		std::cout << "\n";
 		break;
 	}
+#endif
+
+	switch (toCall) {
+	case 0:
+		ShouldTurn = true;
+		
+	#ifdef DEBUG_LOGIC
+		std::cout << (int)currentPosition << " ";
+		switch (cards[currentPosition]) {
+		case one:
+			std::cout << "one";
+			break;
+		case two:
+			std::cout << "two";
+			break;
+		case three:
+			std::cout << "thr";
+			break;
+		case four:
+			std::cout << "fou";
+			break;
+		default:
+			std::cout << "cle";
+			break;
+		}
+	#endif
+		switch (cards[currentPosition]) {
+		case one:
+			++currentPosition;
+			toCall = 1;
+			break;
+		case two:
+			++currentPosition;
+			toCall = 2;
+			break;
+		case three:
+			++currentPosition;
+			toCall = 3;
+			break;
+		case four:
+			++currentPosition;
+			toCall = 4;
+			break;
+		default:
+			++currentPosition;
+			break;
+		}
+
+		break;
+	case 1:
+		testOne();
+		break;
+	case 2:
+		testTwo();
+		break;
+	case 3:
+		testThree();
+		break;
+	case 4:
+		testFour();
+		break;
+	}
+
+#ifdef DEBUG_LOGIC
+	std::cout << "\n";
+#endif
+
 }
 void Hand::clear() {
 	for (uint8 currentCard = 0; currentCard < nrCards; ++currentCard) {

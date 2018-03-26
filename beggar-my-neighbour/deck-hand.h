@@ -1,18 +1,6 @@
 #pragma once
+#include "settings.h"
 
-#include <string>
-using Tstr = std::string;
-using int8 = int8_t;
-using int16 = int16_t;
-using int32 = int32_t;
-using int64 = int64_t;
-using uint8 = uint8_t;
-using uint16 = uint16_t;
-using uint32 = uint32_t;
-using uint64 = uint64_t;
-
-constexpr uint8 nrCards = 40, halfCards = 20; //TODO! set to 52
-constexpr uint8 empty = 255, one = 1, two = 2, three = 3, four = 4;
 
 //cards in players' hand
 class Deck {
@@ -31,6 +19,8 @@ public:
 	bool notEmpty();
 	bool isOriginal();
 
+	uint8 * get();
+	uint8 * getOriginal();
 	uint8 operator[] (uint8 Position);
 	uint8 first();
 
@@ -45,7 +35,7 @@ private:
 	uint8 toCall;
 	uint8 currentPosition;
 
-	bool IsLastSeenSpecial, ShouldTurn, Ended;
+	bool ShouldTurn, Ended;
 
 	void testOne();
 	void testTwo();
