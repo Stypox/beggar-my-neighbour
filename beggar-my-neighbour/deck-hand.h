@@ -1,7 +1,6 @@
 #pragma once
 #include "settings.h"
 
-
 //cards in players' hand
 class Deck {
 public:
@@ -15,7 +14,9 @@ public:
 
 	void shift();
 	void append(uint8 cardsToAdd[]);
+	void resetOriginal();
 
+	bool isEmpty();
 	bool notEmpty();
 	bool isOriginal();
 

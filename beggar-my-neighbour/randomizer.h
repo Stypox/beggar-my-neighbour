@@ -1,6 +1,9 @@
 #pragma once
-#include "deck-hand.h"
 #include "settings.h"
+#include "deck-hand.h"
+#include "logic.h"
+
+uint8 cardsRand(uint8 max);
 
 bool getFromFile(Deck &deckA, Deck &deckB);
 

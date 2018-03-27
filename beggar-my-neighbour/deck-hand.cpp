@@ -1,5 +1,4 @@
 #pragma once
-
 #include "settings.h"
 #include "deck-hand.h"
 
@@ -43,7 +42,15 @@ void Deck::append(uint8 cardsToAdd[]) {
 		}
 	}
 }
+void Deck::resetOriginal() {
+	for (uint8 currentCard = 0; currentCard < nrCards; ++currentCard) {
+		cards[currentCard] = originalCards[currentCard];
+	}
+}
 
+bool Deck::isEmpty() {
+	return *cards == empty;
+}
 bool Deck::notEmpty() {
 	return *cards != empty;
 }

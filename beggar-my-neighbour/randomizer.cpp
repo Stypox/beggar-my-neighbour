@@ -1,15 +1,10 @@
 #pragma once
-#include <fileManagement.h>
-#include <algorithm>
-#include <random>
-
 #include "settings.h"
-#include "deck-hand.h"
 #include "randomizer.h"
 
-uint8 cardsRand(uint8 n) {
+uint8 cardsRand(uint8 max) {
 	srand(rand() + timeRand);
-	return rand() % n;
+	return rand() % max;
 }
 
 bool getFromFile(Deck &deckA, Deck &deckB) {
@@ -98,9 +93,5 @@ void randomizeFromDeck(Deck & deckA, Deck & deckB, uint8 deckFrom[nrCards], bool
 }
 
 void randomize(Deck &deckA, Deck &deckB) {
-	uint8 deck[nrCards];
-	for (uint8 currentCard = 0; currentCard < nrCards; ++currentCard) {
-		deck[currentCard] = basicDeck[currentCard];
-	}
-	randomizeFromDeck(deckA, deckB, deck);
+	randomizeFromDeck(deckA, deckB, basicDeck);
 }

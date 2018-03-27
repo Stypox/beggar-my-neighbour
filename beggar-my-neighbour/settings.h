@@ -1,7 +1,7 @@
 #pragma once
 
 
-#define DEBUG_TIME
+//#define DEBUG_TIME
 //#define DEBUG_RAND
 //#define DEBUG_GAME
 //#define DEBUG_ENDGAME
@@ -16,6 +16,8 @@
 #include <fileManagement.h>
 #include <string>
 #include <cstdint>
+#include <algorithm>
+#include <random>
 
 
 #ifdef DEBUG_TIME
@@ -40,23 +42,37 @@ using uint64 = uint64_t;
 constexpr const char * inputFilePath = "input.txt";
 constexpr const char * outputFilePath = "output.txt";
 
-constexpr uint8 nrCards = 52,
-				halfCards = 26,
-				
-				empty = 255, 
-				one = 1, 
-				two = 2, 
-				three = 3, 
-				four = 4,
-				
-				nrOne = 4,
-				nrTwo = 4,
-				nrThree = 4,
-				nrFour = 4;
+constexpr uint8
+nrCards = 52,
+halfCards = 26,
 
-constexpr const uint8 basicDeck[nrCards] = { 1,1,1,1,2,2,2,2,3,3,3,3,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 };
+empty = 255,
+one = 1,
+two = 2,
+three = 3,
+four = 4,
+
+nrOne = 4,
+nrTwo = 4,
+nrThree = 4,
+nrFour = 4;
+
+
+constexpr bool 
+turnA = 1,
+turnB = 0;
+
+
+#define basicDeck ( 1,1,1,1,2,2,2,2,3,3,3,3,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 )
+
 
 const int timeRand = (int)time(0);
 
+
 constexpr uint64 printTimeEveryIterations = 10000;
 
+
+
+#include "deck-hand.h"
+#include "logic.h"
+#include "randomizer.h"
