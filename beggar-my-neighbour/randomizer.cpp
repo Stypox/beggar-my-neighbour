@@ -3,8 +3,10 @@
 #include "randomizer.h"
 
 uint8 cardsRand(uint8 max) {
-	srand(rand() + timeRand);
-	return rand() % max;
+	static uint64 seedOffset(timeRand);
+	static std::mt19937 rng(0);
+	std::uniform_int_distribution<int> gen(0, max - 1);
+	return gen(rng);
 }
 
 bool getFromFile(Deck &deckA, Deck &deckB) {
@@ -42,6 +44,7 @@ void randomizeFromDeck(Deck &deckA, Deck &deckB, uint8 deckFrom[nrCards]) {
 		std::cout << (int)deckFrom[currentCard] << " ";
 	}
 #endif
+
 
 	uint8 currentCard = 0;
 	for (; currentCard < halfCards; ++currentCard) {
@@ -93,5 +96,6 @@ void randomizeFromDeck(Deck & deckA, Deck & deckB, uint8 deckFrom[nrCards], bool
 }
 
 void randomize(Deck &deckA, Deck &deckB) {
-	randomizeFromDeck(deckA, deckB, basicDeck);
+	uint8 deck[nrCards] = basicDeck;
+	randomizeFromDeck(deckA, deckB, deck);
 }

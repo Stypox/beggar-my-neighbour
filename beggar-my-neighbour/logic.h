@@ -1,6 +1,10 @@
 #pragma once
 #include "settings.h"
 
+
+bool isSpecial(uint8 card);
+
+
 class Game {
 private:
 	Deck deckA;
@@ -12,6 +16,7 @@ private:
 public:
 	Game();
 
+	void resetOriginal();
 	void mutateRandom();
 	void operator=(Game game);
 

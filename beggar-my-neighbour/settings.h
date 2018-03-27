@@ -1,13 +1,25 @@
 #pragma once
 
 
-//#define DEBUG_TIME
+#define DEBUG_TIME
 //#define DEBUG_RAND
 //#define DEBUG_GAME
 //#define DEBUG_ENDGAME
 //#define DEBUG_LOGIC
+#define DEBUG_EVOLUTION
+
 #ifdef DEBUG_GAME
 #define DEBUG_ENDGAME
+#endif
+
+
+#ifdef DEBUG_TIME
+#include <chrono>
+using tPoint = std::chrono::high_resolution_clock::time_point;
+using clk = std::chrono::high_resolution_clock;
+using micros = std::chrono::microseconds;
+#else
+#include <time.h>
 #endif
 
 
@@ -19,15 +31,6 @@
 #include <algorithm>
 #include <random>
 
-
-#ifdef DEBUG_TIME
-#include <chrono>
-using tPoint = std::chrono::high_resolution_clock::time_point;
-using cl = std::chrono::high_resolution_clock;
-using micros = std::chrono::microseconds;
-#else
-#include <time.h>
-#endif
 
 using int8 = int8_t;
 using int16 = int16_t;
@@ -41,6 +44,7 @@ using uint64 = uint64_t;
 
 constexpr const char * inputFilePath = "input.txt";
 constexpr const char * outputFilePath = "output.txt";
+
 
 constexpr uint8
 nrCards = 52,
@@ -63,13 +67,16 @@ turnA = 1,
 turnB = 0;
 
 
-#define basicDeck ( 1,1,1,1,2,2,2,2,3,3,3,3,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 )
+#define basicDeck { 1,1,1,1,2,2,2,2,3,3,3,3,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 }
 
 
 const int timeRand = (int)time(0);
 
 
+#ifdef DEBUG_TIME
 constexpr uint64 printTimeEveryIterations = 10000;
+#endif
+
 
 
 

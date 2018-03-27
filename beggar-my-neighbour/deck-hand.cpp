@@ -3,12 +3,6 @@
 #include "deck-hand.h"
 
 
-bool isSpecial(uint8 card) {
-	return card == one || card == two || card == three || card == four;
-}
-
-
-
 Deck::Deck() {
 	for (uint8 currentCard = 0; currentCard < nrCards; ++currentCard) {
 		cards[currentCard] = empty;
