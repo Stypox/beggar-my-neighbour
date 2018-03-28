@@ -4,12 +4,12 @@
 #define DEBUG_TIME
 //#define DEBUG_RAND
 //#define DEBUG_GAME
-//#define DEBUG_ENDGAME
+//#define DEBUG_BEGEND
 //#define DEBUG_LOGIC
 #define DEBUG_EVOLUTION
 
 #ifdef DEBUG_GAME
-#define DEBUG_ENDGAME
+#define DEBUG_BEGEND
 #endif
 
 
@@ -68,9 +68,6 @@ turnB = 0;
 
 
 #define basicDeck { 1,1,1,1,2,2,2,2,3,3,3,3,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 }
-
-
-const int timeRand = (int)time(0);
 
 
 #ifdef DEBUG_TIME

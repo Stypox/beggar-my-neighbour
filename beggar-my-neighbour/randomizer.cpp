@@ -3,10 +3,9 @@
 #include "randomizer.h"
 
 uint8 cardsRand(uint8 max) {
-	static uint64 seedOffset(timeRand);
-	static std::mt19937 rng(0);
-	std::uniform_int_distribution<int> gen(0, max - 1);
-	return gen(rng);
+	static std::mt19937 generatorRand((int)time(0));
+	std::uniform_int_distribution<short> distributionRand(0, max - 1);
+	return (uint8)distributionRand(generatorRand);
 }
 
 bool getFromFile(Deck &deckA, Deck &deckB) {

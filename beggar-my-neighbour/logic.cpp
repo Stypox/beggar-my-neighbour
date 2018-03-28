@@ -22,7 +22,7 @@ Game::Game() : rounds(0) {
 void Game::resetOriginal() {
 	deckA.resetOriginal();
 	deckB.resetOriginal();
-#ifdef DEBUG_GAME
+#ifdef DEBUG_BEGEND
 	std::cout << "Just reset cards from resetOriginal():\n";
 	deckA.print();
 	std::cout << "  |  ";
@@ -34,18 +34,16 @@ void Game::mutateRandom() {
 	uint8 randA = cardsRand(halfCards),
 		randB = cardsRand(halfCards);
 
-	if (!isSpecial(deckB.cards[randB])) {
-		while (!isSpecial(deckA.cards[randA])) {
-			randA = cardsRand(halfCards);
-			std::cout << (int)randA << " " << (int)deckA.cards[randA] << "\n";
-		}
+	while (!isSpecial(deckA.cards[randA]) && !isSpecial(deckB.cards[randB])) {
+		randA = cardsRand(halfCards);
+		randB = cardsRand(halfCards);
 	}
 
 	deckA.cards[randA] = deckB.originalCards[randB];
 	deckB.cards[randB] = deckA.originalCards[randA];
 	deckA.originalCards[randA] = deckA.cards[randA];
 	deckB.originalCards[randB] = deckB.cards[randB];
-#ifdef DEBUG_GAME
+#ifdef DEBUG_BEGEND
 	std::cout << "Just mutated cards from mutateRandom(). Seeds: " << (int)randA << " " << (int)randB << "\n";
 	deckA.print();
 	std::cout << "  |  ";
@@ -138,17 +136,17 @@ void Game::play() {
 
 #ifdef DEBUG_LOGIC
 	std::cout << (deckA.isEmpty() ? "B won at round " : "A won at round ") << rounds << ": ";
-#ifdef DEBUG_ENDGAME
+#ifdef DEBUG_BEGEND
 	if (deckA.isEmpty()) deckB.print();
 	else deckA.print();
 #endif
 	std::cout << "   ";
 	hand.print();
-#ifndef DEBUG_ENDGAME
+#ifndef DEBUG_BEGEND
 	std::cout << "\n\n\n\n";
 #endif
 #endif
-#ifdef DEBUG_ENDGAME
+#ifdef DEBUG_BEGEND
 #ifndef DEBUG_LOGIC
 	std::cout << (deckA.isEmpty() ? "B won at round " : "A won at round ") << rounds << ": ";
 	if (deckA.isEmpty()) deckB.print();
