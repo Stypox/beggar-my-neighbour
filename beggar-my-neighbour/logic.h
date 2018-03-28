@@ -18,7 +18,7 @@ public:
 
 	void resetOriginal();
 	void mutateRandom();
-	void operator=(Game game);
+	void operator=(Game &game);
 
 	void play();
 

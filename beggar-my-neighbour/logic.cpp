@@ -51,7 +51,7 @@ void Game::mutateRandom() {
 	std::cout << "\n\n";
 #endif
 }
-void Game::operator=(Game game) {
+void Game::operator=(Game &game) {
 	deckA(game.deckA.originalCards);
 	deckB(game.deckB.originalCards);
 	rounds = 0;
