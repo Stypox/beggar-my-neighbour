@@ -9,21 +9,39 @@ bool isSpecial(uint8 card) {
 
 
 Game::Game() : rounds(0) {
-	randomize(deckA, deckB);
-#ifdef DEBUG_GAME
-	std::cout << "Just generated cards from Game():\n";
-	deckA.print();
-	std::cout << "  |  ";
-	deckB.print();
-	std::cout << "\n\n";
-#endif
+	randomize();
 }
 
 void Game::resetOriginal() {
 	deckA.resetOriginal();
 	deckB.resetOriginal();
 #ifdef DEBUG_BEGEND
-	std::cout << "Just reset cards from resetOriginal():\n";
+	std::cout << "Reset cards from resetOriginal():\n";
+	deckA.print();
+	std::cout << "  |  ";
+	deckB.print();
+	std::cout << "\n\n";
+#endif
+}
+void Game::randomize() {
+	uint8 deck[nrCards] = basicDeck;
+
+	std::random_shuffle(deck, deck + nrCards, cardsRand);
+
+	uint8 currentCard = 0;
+	for (; currentCard < halfCards; ++currentCard) {
+		deckA.originalCards[currentCard] = deck[currentCard];
+		deckA.cards[currentCard] = deck[currentCard];
+	}
+	for (; currentCard < nrCards; ++currentCard) {
+		deckB.originalCards[currentCard - halfCards] = deck[currentCard];
+		deckB.cards[currentCard - halfCards] = deck[currentCard];
+		deckA.cards[currentCard] = empty;
+		deckB.cards[currentCard] = empty;
+	}
+
+#ifdef DEBUG_BEGEND
+	std::cout << "Randomized cards from randomize():\n";
 	deckA.print();
 	std::cout << "  |  ";
 	deckB.print();
@@ -44,7 +62,7 @@ void Game::mutateRandom() {
 	deckA.originalCards[randA] = deckA.cards[randA];
 	deckB.originalCards[randB] = deckB.cards[randB];
 #ifdef DEBUG_BEGEND
-	std::cout << "Just mutated cards from mutateRandom(). Seeds: " << (int)randA << " " << (int)randB << "\n";
+	std::cout << "Mutated cards from mutateRandom(). Seeds: " << (int)randA << " " << (int)randB << "\n";
 	deckA.print();
 	std::cout << "  |  ";
 	deckB.print();
@@ -107,7 +125,7 @@ void Game::play() {
 
 			hand.clear();
 
-			if (deckA.isOriginal() || deckB.isOriginal()) {
+			if (deckA.isOriginal() && deckB.isOriginal()) {
 				File output(outputFilePath);
 
 				uint8 * originalA = deckA.getOriginal();
@@ -115,9 +133,9 @@ void Game::play() {
 				if (!output.append("\r\n")) {
 					while (1) {
 						for (uint8 currentCard = 0; currentCard < halfCards; ++currentCard)
-							std::cout << deckA[currentCard];
+							std::cout << deckA[currentCard] << " ";
 						for (uint8 currentCard = 0; currentCard < halfCards; ++currentCard)
-							std::cout << deckB[currentCard];
+							std::cout << deckB[currentCard] << " ";
 						std::cout << "\n";
 					}
 				}
@@ -126,6 +144,7 @@ void Game::play() {
 				for (uint8 currentCard = 0; currentCard < halfCards; ++currentCard)
 					output.appendWord(std::to_string(deckB[currentCard]));
 				
+				rounds = UINT64_MAX;
 			}
 		}
 		else if (hand.shouldTurn())
@@ -169,4 +188,10 @@ bool Game::operator<(Game game) const  {
 
 Game::operator uint64() const {
 	return rounds;
+}
+
+void Game::print() {
+	deckA.print();
+	std::cout << " | ";
+	deckB.print();
 }

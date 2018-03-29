@@ -17,6 +17,7 @@ public:
 	Game();
 
 	void resetOriginal();
+	void randomize();
 	void mutateRandom();
 	void operator=(Game &game);
 
@@ -25,4 +26,6 @@ public:
 	bool operator>(Game game) const;
 	bool operator<(Game game) const;
 	operator uint64() const;
+
+	void print();
 };
